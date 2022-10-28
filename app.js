@@ -15,7 +15,7 @@ app.set("views","./src/views");
 app.set("view engine", "ejs");
 
 MedicineRouter.route("/").get((req,res) => {
-    res.send("Hello World. It's Medicine");
+    res.render(Medicine);
 });
 MedicineRouter.route("/1").get((req,res) => {
     res.send("Hello World. It's Medicine1");
