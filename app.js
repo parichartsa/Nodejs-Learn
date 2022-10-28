@@ -15,7 +15,14 @@ app.set("views","./src/views");
 app.set("view engine", "ejs");
 
 MedicineRouter.route("/").get((req,res) => {
-    res.render("Medicine");
+    res.render("Medicine", {
+        Medicine:[
+            {Medicinename : "Amoxilin", Meddesc : "แก้อักเสบ", Meduse : "เช้า-เย็น ครั้งละ 2 เม็ด"},
+            {Medicinename : "Para", Meddesc : "แก้ปวด", Meduse : "ทุก 6 ชม."},
+            {Medicinename : "Tiffy", Meddesc : "ลดไข้", Meduse : "เช้า-เย็น ครั้งละ 1 เม็ด"},
+            {Medicinename : "Vitamin C", Meddesc : "วิตามิน C 500 ml.", Meduse : "วันละ 1 เม็ด"},
+        ],
+    });
 });
 MedicineRouter.route("/1").get((req,res) => {
     res.send("Hello World. It's Medicine1");
