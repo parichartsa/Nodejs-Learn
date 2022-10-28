@@ -26,7 +26,11 @@
 
     <section id = "features" class="ud-features">
       <div class="container">
-        <h1> Hello World </h1>
+        <h1> Hello World </h1>\
+        <%p medicine.map((medicine) => {%>
+          <h1> <%=medicine.medicineName%></h1>
+          <p> <%=medicine.medicineDesc%></p>
+        <%})%>
       </div>
     </section>
 
