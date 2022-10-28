@@ -4,7 +4,7 @@ const debug = require('debug')('app');
 const morgan = require('morgan');
 const Medicine = require("./data/medicine.json")
 const path = require('path')
-const MedicineRouter = express.Router();
+const medicineRouter = express.Router();
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -15,16 +15,14 @@ app.use(express.static(path.join(__dirname, "/public/")));
 app.set("views","./src/views");
 app.set("view engine", "ejs");
 
-MedicineRouter.route("/").get((req,res) => {
-    res.render("Medicine", 
-        Medicine,
-    );
+medicineRouter.route("/").get((req,res) => {
+    res.render("medicine");
 });
-MedicineRouter.route("/1").get((req,res) => {
+medicineRouter.route("/1").get((req,res) => {
     res.send("Hello World. It's Medicine1");
 });
 
-app.use("/Medicine", MedicineRouter)
+app.use("/medicine", medicineRouter)
 
 app.get("/", (req,res) => {
 
