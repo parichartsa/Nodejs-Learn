@@ -1,97 +1,106 @@
 (function () {
-  //===== Prealoder
+  "use strict";
 
-  window.onload = function () {
-    window.setTimeout(fadeout, 500);
-  };
-
-  function fadeout() {
-    document.querySelector(".preloader").style.opacity = "0";
-    document.querySelector(".preloader").style.display = "none";
-  }
-
-  /*=====================================
-    Sticky
-    ======================================= */
+  // ======= Sticky
   window.onscroll = function () {
-    const header_navbar = document.querySelector(".navbar-area");
-    const sticky = header_navbar.offsetTop;
-    const logo = document.querySelector(".navbar-brand img");
+    const ud_header = document.querySelector(".ud-header");
+    const sticky = ud_header.offsetTop;
+    const logo = document.querySelector(".header-logo");
 
     if (window.pageYOffset > sticky) {
-      header_navbar.classList.add("sticky");
-      logo.src = "assets/img/logo/logo-2.svg";
+      ud_header.classList.add("sticky");
     } else {
-      header_navbar.classList.remove("sticky");
-      logo.src = "assets/img/logo/logo.svg";
+      ud_header.classList.remove("sticky");
+    }
+
+    // === logo change
+    if (ud_header.classList.contains("sticky")) {
+      logo.src = "assets/images/logo/logo.svg";
+    } else {
+      logo.src = "assets/images/logo/logo-white.svg";
     }
 
     // show or hide the back-top-top button
-    const backToTo = document.querySelector(".scroll-top");
+    const backToTop = document.querySelector(".back-to-top");
     if (
       document.body.scrollTop > 50 ||
       document.documentElement.scrollTop > 50
     ) {
-      backToTo.style.display = "flex";
+      backToTop.style.display = "flex";
     } else {
-      backToTo.style.display = "none";
+      backToTop.style.display = "none";
     }
   };
 
-  // for menu scroll
-  const pageLink = document.querySelectorAll(".page-scroll");
+  // ===== responsive navbar
+  let navbarToggler = document.querySelector("#navbarToggler");
+  const navbarCollapse = document.querySelector("#navbarCollapse");
 
-  pageLink.forEach((elem) => {
-    elem.addEventListener("click", (e) => {
-      e.preventDefault();
-      document.querySelector(elem.getAttribute("href")).scrollIntoView({
-        behavior: "smooth",
-        offsetTop: 1 - 60,
-      });
+  navbarToggler.addEventListener("click", () => {
+    navbarToggler.classList.toggle("navbarTogglerActive");
+    navbarCollapse.classList.toggle("hidden");
+  });
+
+  //===== close navbar-collapse when a  clicked
+  document
+    .querySelectorAll("#navbarCollapse ul li:not(.submenu-item) a")
+    .forEach((e) =>
+      e.addEventListener("click", () => {
+        navbarToggler.classList.remove("navbarTogglerActive");
+        navbarCollapse.classList.add("hidden");
+      })
+    );
+
+  // ===== Sub-menu
+  const submenuItems = document.querySelectorAll(".submenu-item");
+  submenuItems.forEach((el) => {
+    el.querySelector("a").addEventListener("click", () => {
+      el.querySelector(".submenu").classList.toggle("hidden");
     });
   });
 
-  // section menu active
-  function onScroll(event) {
-    const sections = document.querySelectorAll(".page-scroll");
-    const scrollPos =
-      window.pageYOffset ||
-      document.documentElement.scrollTop ||
-      document.body.scrollTop;
-
-    for (let i = 0; i < sections.length; i++) {
-      const currLink = sections[i];
-      const val = currLink.getAttribute("href");
-      const refElement = document.querySelector(val);
-      const scrollTopMinus = scrollPos + 73;
-      if (
-        refElement.offsetTop <= scrollTopMinus &&
-        refElement.offsetTop + refElement.offsetHeight > scrollTopMinus
-      ) {
-        document.querySelector(".page-scroll").classList.remove("active");
-        currLink.classList.add("active");
-      } else {
-        currLink.classList.remove("active");
-      }
-    }
-  }
-
-  window.document.addEventListener("scroll", onScroll);
-
-  //===== close navbar-collapse when a  clicked
-  let navbarToggler = document.querySelector(".navbar-toggler");
-  const navbarCollapse = document.querySelector(".navbar-collapse");
-
-  document.querySelectorAll(".page-scroll").forEach((e) =>
-    e.addEventListener("click", () => {
-      navbarToggler.classList.remove("active");
-      navbarCollapse.classList.remove("show");
-    })
-  );
-  navbarToggler.addEventListener("click", function () {
-    navbarToggler.classList.toggle("active");
+  // ===== Faq accordion
+  const faqs = document.querySelectorAll(".single-faq");
+  faqs.forEach((el) => {
+    el.querySelector(".faq-btn").addEventListener("click", () => {
+      el.querySelector(".icon").classList.toggle("rotate-180");
+      el.querySelector(".faq-content").classList.toggle("hidden");
+    });
   });
 
-  // WOW active
+  // ===== wow js
   new WOW().init();
+
+  // ====== scroll top js
+  function scrollTo(element, to = 0, duration = 500) {
+    const start = element.scrollTop;
+    const change = to - start;
+    const increment = 20;
+    let currentTime = 0;
+
+    const animateScroll = () => {
+      currentTime += increment;
+
+      const val = Math.easeInOutQuad(currentTime, start, change, duration);
+
+      element.scrollTop = val;
+
+      if (currentTime < duration) {
+        setTimeout(animateScroll, increment);
+      }
+    };
+
+    animateScroll();
+  }
+
+  Math.easeInOutQuad = function (t, b, c, d) {
+    t /= d / 2;
+    if (t < 1) return (c / 2) * t * t + b;
+    t--;
+    return (-c / 2) * (t * (t - 2) - 1) + b;
+  };
+
+  document.querySelector(".back-to-top").onclick = () => {
+    scrollTo(document.documentElement);
+  };
 })();
