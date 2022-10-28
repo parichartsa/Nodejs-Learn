@@ -14,7 +14,7 @@ app.set("view engine", "ejs");
 
 app.get("/", (req,res) => {
 
-    res.render('index', {username : "Onicha", friend : ["Tah", "Alitah", "On"]})
+    res.render('index', {username : "Onicha", friend : ["Tah", "Alitah", "On", "cha"]})
 })
 
 app.listen(PORT, () => {
