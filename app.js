@@ -2,7 +2,7 @@ const express = require('express');
 const chalk = require('chalk');
 const debug = require('debug')('app');
 const morgan = require('morgan');
-const Medicine = require("./data/medicine.json")
+const medicine = require("./data/medicine.json")
 const path = require('path')
 const medicineRouter = express.Router();
 
@@ -17,12 +17,7 @@ app.set("view engine", "ejs");
 
 medicineRouter.route("/").get((req,res) => {
     res.render("medicine", {
-        medicine:[
-            {medicineName : 'Amoxilin', medicineDesc : 'แก้อักเสบ', medicineUse : '1 cap 2 times'},
-            {medicineName : 'Para', medicineDesc : 'แก้ปวด', medicineUse : 'every 6 hr.'},
-            {medicineName : 'Tiffy', medicineDesc : 'ลดไข้', medicineUse : 'every 6 hr.'},
-            {medicineName : 'VitaminC', medicineDesc : 'วิตามิน', medicineUse : '1 cap moring'},   
-        ],
+        medicine,
     });
 });
 medicineRouter.route("/1").get((req,res) => {

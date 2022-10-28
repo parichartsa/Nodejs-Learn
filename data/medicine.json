@@ -1,24 +1,24 @@
 {
-    "Medicine": [
+    "medicine": [
       {
-        "Medicinename": "Amoxilin",
-        "Meddesc": "แก้อักเสบ",
-        "Meduse": "เช้า-เย็น ครั้งละ 2 เม็ด"
+        "medicineName": "Amoxilin",
+        "medicineDesc": "แก้อักเสบ",
+        "medicineUse": "1 cap 2 times"
       },
       {
-        "Medicinename": "Para",
-        "Meddesc": "แก้ปวด",
-        "Meduse": "ทุก 6 ชม."
+        "medicineName": "Para",
+        "medicineDesc": "แก้ปวด",
+        "medicineUse": "every 6 hr."
       },
       {
-        "Medicinename": "Tiffy",
-        "Meddesc": "ลดไข้",
-        "Meduse": "เช้า-เย็น ครั้งละ 1 เม็ด"
+        "medicineName": "Tiffy",
+        "medicineDesc": "ลดไข้",
+        "medicineUse": "every 6 hr."
       },
       {
-        "Medicinename": "Vitamin C",
-        "Meddesc": "วิตามิน C 500 ml.",
-        "Meduse": "วันละ 1 เม็ด"
+        "medicineName": "VitaminC",
+        "medicineDesc": "วิตามิน",
+        "medicineUse": "1 cap moring"
       }
     ]
   }
